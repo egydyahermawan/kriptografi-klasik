@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <script>
+        let changeState = () => {
+            let mode = $("input[type='radio']:checked").val()
+
+            if (mode == 'all') {
+                $('#label-input-plaintext').text('Plaintext')
+            } else if (mode == 'encode') {
+                $('#label-input-plaintext').text('Plaintext')
+            } else {
+                $('#label-input-plaintext').text('Chipertext')
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold text-body-emphasis">Kriptografi Klasik</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Sebuah aplikasi sederhana untuk melakukan proses Enkripsi dan Dekripsi menggunakan
+                algoritma Kriptografi Klasik seperti: Caesar dan Vigenere</p>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-xs-12 col-sm-10 col-mb-6 col-lg-5 col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Konfigurasi Plaintext</h5>
+                        <div class="mb-3">
+                            <label for="algoritma" class="form-label">Algoritma</label>
+                            <select class="form-select mb-3" id="algoritma">
+                                <option value="caesar">Algoritma Caesar</option>
+                                <option value="vigenere">Algoritma Vigenere</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="mode" id="all" value="all" checked
+                                    onchange="changeState()">
+                                <label class="form-check-label" for="all">Encode & Decode</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="mode" id="encode" value="encode"
+                                    onchange="changeState()">
+                                <label class="form-check-label" for="encode">Encode</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="mode" id="decode" value="decode"
+                                    onchange="changeState()">
+                                <label class="form-check-label" for="decode">Decode</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-plaintext" class="form-label" id="label-input-plaintext">Plaintext</label>
+                            <input type="text" class="form-control" id="input-plaintext">
+                        </div>
+                        <div class="mb-3" id="kunci">
+                            <label for="input-kunci-caesar" class="form-label">Kunci Caesar</label>
+                            <input type="number" class="form-control" id="input-kunci-caesar">
+                        </div>
+                        <div class="d-flex gap-3">
+                            <button class="btn btn-primary w-100" id="btn-proses">Proses</button>
+                            <button class="btn btn-outline-secondary w-100" id="btn-batal">Batal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="card mb-3" id="table-encode">
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" id="encode-title">Hasil Enkripsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="encode-p"></tr>
+                        <tr id="encode-d"></tr>
+                        <tr id="encode-sum-d"></tr>
+                        <tr id="encode-mod-result"></tr>
+                        <tr id="encode-c"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card" id="table-decode">
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" id="decode-title">Hasil Dekripsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="decode-c"></tr>
+                        <tr id="decode-d"></tr>
+                        <tr id="decode-substract-d"></tr>
+                        <tr id="decode-mod-result"></tr>
+                        <tr id="decode-p"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card mb-3" id="table-encode-vigenere">
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" id="encode-vigenere-title">Hasil Enkripsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="encode-vigenere-p"></tr>
+                        <tr id="encode-vigenere-k"></tr>
+                        <tr id="encode-vigenere-d"></tr>
+                        <tr id="encode-vigenere-dk"></tr>
+                        <tr id="encode-vigenere-sum-d"></tr>
+                        <tr id="encode-vigenere-mod-result"></tr>
+                        <tr id="encode-vigenere-c"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card" id="table-decode-vigenere">
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" id="decode-vigenere-title">Hasil Dekripsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="decode-vigenere-c"></tr>
+                        <tr id="decode-vigenere-k"></tr>
+                        <tr id="decode-vigenere-d"></tr>
+                        <tr id="decode-vigenere-dk"></tr>
+                        <tr id="decode-vigenere-substract-d"></tr>
+                        <tr id="decode-vigenere-mod-result"></tr>
+                        <tr id="decode-vigenere-p"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container bg-dark border-top">
+        <footer class="py-3 my-4">
+            <p class="text-center text-body-secondary">oleh Egy Dya Hermawan 🫡</p>
+        </footer>
+    </div>
+
+    <script src="core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
